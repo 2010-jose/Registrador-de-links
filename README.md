@@ -1,6 +1,6 @@
 # LinkBase
 
-LinkBase é um site local para guardar links em categorias. Cada conta tem
+LinkBase é um aplicativo local para guardar links em categorias. Cada conta tem
 sua própria biblioteca e pode criar, renomear e excluir categorias, além de
 adicionar, editar e remover links.
 
@@ -36,6 +36,20 @@ Depois, abra <http://127.0.0.1:5000> no navegador. Na primeira execução, o
 aplicativo cria o banco e as tabelas automaticamente.
 
 Para encerrar o servidor, volte ao terminal e pressione `Ctrl+C`.
+
+## Desenvolvimento e otimização
+
+Durante o desenvolvimento deste projeto, houve auxílio de inteligência artificial para apoiar melhorias focadas em:
+
+- organização da estrutura do aplicativo em Flask;
+- criação e ajuste das rotas de cadastro, login, categorias e links;
+- melhoria da lógica de validação de formulários e mensagens de erro;
+- organização do banco de dados SQLite e das relações entre usuários, categorias e links;
+- otimização da experiência de uso e da navegação entre páginas;
+- revisão da arquitetura do código para deixar a manutenção mais simples e eficiente;
+- reforço de boas práticas de segurança básica e controle de sessão.
+
+Esse suporte contribuiu para deixar o sistema mais estável, mais fácil de evoluir e com melhor desempenho na gestão de contas, categorias e links.
 
 ## Banco de dados
 
