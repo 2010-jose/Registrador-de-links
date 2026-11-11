@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Conta — LinkBase{% endblock %}
+
+{% block content %}
+{# A página reúne os dados pessoais, a troca de senha e a exclusão da conta. #}
+<header class="page-header">
+    <div>
+        <p class="eyebrow">PREFERÊNCIAS</p>
+        <h1>Sua conta</h1>
+        <p class="muted">Mantenha seus dados atualizados.</p>
+    </div>
+</header>
+
+<div class="account-grid">
+    {# Alterar dados de identificação exige a senha atual. #}
+    <section class="panel form-panel">
+        <h2>Dados pessoais</h2>
+        <p class="error">{{ error }}</p>
+        <form action="{{ url_for('account') }}" method="post" class="form-stack">
+            <label for="username">Nome de usuário</label>
+            <input id="username" name="username" maxlength="100" value="{{ user.username }}" required>
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" maxlength="120" value="{{ user.email }}" required>
+            <label for="current-profile-password">Senha atual</label>
+            <input id="current-profile-password" name="password" type="password" required>
+            <p class="field-help">Confirme sua senha para salvar alterações neste formulário.</p>
+            <button class="button button-primary" type="submit">Salvar dados</button>
+        </form>
+    </section>
+
+    {# A troca de senha é enviada à sua própria rota. #}
+    <section class="panel form-panel">
+        <h2>Alterar senha</h2>
+        <form action="{{ url_for('change_password') }}" method="post" class="form-stack">
+            <label for="current-password">Senha atual</label>
+            <input id="current-password" name="current_password" type="password" required>
+            <label for="new-password">Nova senha</label>
+            <input id="new-password" name="new_password" type="password" required>
+            <p class="field-help">Escolha a senha que deseja usar.</p>
+            <button class="button button-secondary" type="submit">Alterar senha</button>
+        </form>
+    </section>
+
+    {# A confirmação impede um clique acidental na exclusão da conta. #}
+    <section class="panel form-panel delete-account">
+        <h2>Excluir conta</h2>
+        <p>Esta ação também excluirá todas as suas categorias e links e não poderá ser desfeita.</p>
+        <form action="{{ url_for('delete_account') }}" method="post"
+              onsubmit="return confirm('Tem certeza de que deseja excluir sua conta e todos os seus dados?');">
+            <button class="button button-danger" type="submit">Excluir minha conta</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

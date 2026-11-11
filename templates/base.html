@@ -1,0 +1,38 @@
+{# Estrutura comum a todas as páginas. #}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}LinkBase{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {# A navegação lateral aparece somente depois que a pessoa entra. #}
+    {% if session.get('user_id') %}
+    <div class="app-layout">
+        <aside class="sidebar">
+            <a class="brand" href="{{ url_for('home') }}">
+                <span class="brand-mark">L</span> LinkBase
+            </a>
+            <nav class="side-nav">
+                <a class="nav-link" href="{{ url_for('home') }}">Início</a>
+                <a class="nav-link" href="{{ url_for('account') }}">Conta</a>
+            </nav>
+            <div class="sidebar-bottom">
+                <span class="sidebar-user">{{ session['username'] }}</span>
+                <form action="{{ url_for('logout') }}" method="post">
+                    <button class="text-button" type="submit">Sair da conta</button>
+                </form>
+            </div>
+        </aside>
+        <main class="main-content">
+    {% endif %}
+        {# Cada página coloca seu conteúdo neste bloco. #}
+        {% block content %}{% endblock %}
+    {% if session.get('user_id') %}
+    </main>
+    </div>
+    {% endif %}
+</body>
+</html>

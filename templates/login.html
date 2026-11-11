@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Entrar — LinkBase{% endblock %}
+
+{% block content %}
+{# Formulário de login; a rota envia uma mensagem em error se os dados não conferirem. #}
+<main class="auth-page">
+    <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-mark">L</span> LinkBase
+    </a>
+    <section class="auth-card">
+        <h1>Entre na sua conta</h1>
+        <p class="error">{{ error }}</p>
+        <form action="{{ url_for('login') }}" method="post" class="form-stack">
+            <label for="identifier">Usuário ou e-mail</label>
+            <input id="identifier" name="identifier" required>
+            <label for="password">Senha</label>
+            <input id="password" name="password" type="password" required>
+            <button class="button button-primary button-full" type="submit">Entrar</button>
+        </form>
+        <p class="auth-footer">Ainda não tem uma conta?
+            <a href="{{ url_for('registration') }}">Cadastre-se</a>
+        </p>
+    </section>
+</main>
+{% endblock %}

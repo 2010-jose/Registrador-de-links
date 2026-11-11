@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Editar categoria — LinkBase{% endblock %}
+
+{% block content %}
+{# Formulário para renomear a categoria selecionada. #}
+<div class="narrow-content">
+    <a class="back-link" href="{{ url_for('home') }}">← Voltar ao início</a>
+    <section class="panel form-panel">
+        <p class="eyebrow">CATEGORIA</p>
+        <h1>Editar nome</h1>
+        <p class="error">{{ error }}</p>
+        <form action="{{ url_for('edit_category', category_id=category.id) }}"
+              method="post" class="form-stack">
+            <label for="name">Nome da categoria</label>
+            <input id="name" name="name" maxlength="60" value="{{ category.name }}" required>
+            <button class="button button-primary" type="submit">Salvar alterações</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

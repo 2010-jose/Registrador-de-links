@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Link — LinkBase{% endblock %}
+
+{% block content %}
+{# O mesmo formulário é usado para criar e editar um link. #}
+<div class="narrow-content">
+    <a class="back-link" href="{{ url_for('home') }}">← Voltar ao início</a>
+    <section class="panel form-panel">
+        <h1>{% if saved_link %}Editar link{% else %}Novo link{% endif %}</h1>
+        <p>{{ category.name }}</p>
+        <p class="error">{{ error }}</p>
+        <form action="{{ url_for('edit_link', link_id=saved_link.id) if saved_link else url_for('create_link', category_id=category.id) }}" method="post" class="form-stack">
+            <label for="title">Título</label>
+            <input id="title" name="title" maxlength="100" value="{{ saved_link.title if saved_link else '' }}" required>
+            <label for="url">Endereço do link</label>
+            <input id="url" name="url" type="url" maxlength="2048" value="{{ saved_link.url if saved_link else '' }}" required>
+            <label for="description">Descrição</label>
+            <textarea id="description" name="description" required>{{ saved_link.description if saved_link else '' }}</textarea>
+            <button class="button button-primary" type="submit">Salvar</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

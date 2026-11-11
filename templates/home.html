@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Início — LinkBase{% endblock %}
+
+{% block content %}
+{# Mostra as categorias da conta e os links salvos em cada uma. #}
+<header class="page-header">
+    <div>
+        <h1>Início</h1>
+        <p class="muted">Guarde aqui os links que quer encontrar depois.</p>
+    </div>
+</header>
+
+<section class="create-category panel">
+    <h2>Nova categoria</h2>
+    <p class="error">{{ error }}</p>
+    <form action="{{ url_for('create_category') }}" method="post" class="inline-form">
+        <input name="name" maxlength="60" placeholder="Nome da categoria" required>
+        <button class="button button-primary" type="submit">Adicionar</button>
+    </form>
+</section>
+
+{% if categories %}
+{% for category in categories %}
+    {# Cada seção representa uma categoria. #}
+    <section class="category-section">
+        <div class="category-heading">
+            <h2>{{ category.name }}</h2>
+            <div class="category-actions">
+                <a class="small-link" href="{{ url_for('edit_category', category_id=category.id) }}">Editar</a>
+                <form action="{{ url_for('delete_category', category_id=category.id) }}" method="post"
+                      onsubmit="return confirm('Tem certeza de que deseja excluir esta categoria e todos os links dela?');">
+                    <button class="small-link danger-link" type="submit">Excluir</button>
+                </form>
+            </div>
+        </div>
+        <div class="link-grid">
+            {% if category.links %}
+            {% for link in category.links %}
+            {# Cartão com os dados e as ações de um link. #}
+            <div class="link-card">
+                <h3>{{ link.title }}</h3>
+                <p>{{ link.description }}</p>
+                <a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.url }}</a>
+                <div class="link-actions">
+                    <a href="{{ url_for('edit_link', link_id=link.id) }}">Editar</a>
+                    <form action="{{ url_for('delete_link', link_id=link.id) }}" method="post"
+                          onsubmit="return confirm('Tem certeza de que deseja excluir este link?');">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Esta categoria ainda está vazia.</p>
+            {% endif %}
+            <a class="add-link-card" href="{{ url_for('create_link', category_id=category.id) }}">
+                + Adicionar um link
+            </a>
+        </div>
+    </section>
+{% endfor %}
+{% else %}
+    <section class="empty-state">
+        <h2>Sua biblioteca começa com uma categoria</h2>
+        <p>Crie uma categoria acima e depois adicione seu primeiro link.</p>
+    </section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}LinkBase — seus links em um só lugar{% endblock %}
+
+{% block content %}
+{# Página pública com acesso ao cadastro e ao login. #}
+<main class="landing">
+    <a class="brand landing-brand" href="{{ url_for('index') }}">
+        <span class="brand-mark">L</span> LinkBase
+    </a>
+    <section class="landing-copy">
+        <h1>Seus links importantes, sempre à mão.</h1>
+        <p class="landing-description">
+            Organize páginas para ler depois em categorias simples e encontre
+            tudo quando precisar.
+        </p>
+        <div class="landing-actions">
+            <a class="button button-primary" href="{{ url_for('registration') }}">Criar minha conta</a>
+            <a class="button button-secondary" href="{{ url_for('login') }}">Já tenho uma conta</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
